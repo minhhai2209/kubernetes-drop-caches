@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: drop-caches
+spec:
+  schedule: "*/1 * * * *" # Specifies the schedule in Cron format (runs every 5 seconds)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: drop-caches
+              image: ubuntu
+              command: ["bash", "-c", "echo 3 > /proc/sys/vm/drop_caches"]
+              securityContext:
+                privileged: true # Allows the container to run with privileged access
+          restartPolicy: OnFailure
