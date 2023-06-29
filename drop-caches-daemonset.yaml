@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: drop-caches-daemonset
+spec:
+  selector:
+    matchLabels:
+      app: drop-caches
+  template:
+    metadata:
+      labels:
+        app: drop-caches
+    spec:
+      containers:
+        - name: drop-caches
+          image: ubuntu
+          command:
+            [
+              "bash",
+              "-c",
+              "while true; do echo 3 > /proc/sys/vm/drop_caches; sleep 60; echo 'Done'; done",
+            ]
+          securityContext:
+            privileged: true
+      restartPolicy: Always
