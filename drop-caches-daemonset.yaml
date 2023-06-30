@@ -18,7 +18,7 @@ spec:
             [
               "bash",
               "-c",
-              "while true; do sync && echo 3 > /proc/sys/vm/drop_caches; sleep 60; echo 'Done'; done",
+              "while true; do sync && echo 2 > /proc/sys/vm/drop_caches; sleep 60; echo 'Done'; done",
             ]
           securityContext:
             privileged: true
